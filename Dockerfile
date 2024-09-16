@@ -1,11 +1,18 @@
-FROM node:14-alpine
+# Dockerfile for Node.js application
+FROM node:14
 
+# Create app directory
 WORKDIR /usr/src/app
 
-COPY package*.json /usr/src/app
-
+# Install app dependencies
+COPY package*.json ./
 RUN npm install
 
-COPY . /usr/src/app
+# Bundle app source
+COPY . .
 
-CMD npm start
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Run the app
+CMD [ "node", "app.js" ]
